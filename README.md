@@ -17,6 +17,23 @@ pip3 install -r requirements.txt
 
 ## 使用方法
 
+### 推荐:一条命令全自动 `video_to_doc.py`
+
+自动判断视频有没有字幕轨道:有就直接提取,没有就自动切换 Whisper 语音识别,还可以顺带翻译成中文,全程无需手动处理中间文件:
+
+```bash
+# 只要字幕文档
+python3 video_to_doc.py "https://www.dailymotion.com/video/xxxxx"
+
+# 字幕 + 中文翻译一起做完(本地免费后端)
+python3 video_to_doc.py "https://www.dailymotion.com/video/xxxxx" --translate argos
+
+# 用大模型 API 翻译(准确度高,需先设置 LLM_API_KEY 等环境变量,见下文)
+python3 video_to_doc.py "https://www.dailymotion.com/video/xxxxx" --translate llm
+```
+
+以下三个单步工具适合只需要其中一步、或想分步控制参数时使用。
+
 ### 1. 提取字幕(视频自带字幕轨道时)
 
 ```bash
