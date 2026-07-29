@@ -18,7 +18,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from dailymotion_subtitles import build_documents, fetch_info, format_time
+from dailymotion_subtitles import EXTRA_OPTS, build_documents, fetch_info, format_time, set_cookies_opts
 
 
 def download_audio(url: str, workdir: Path) -> tuple[Path, dict]:
@@ -31,6 +31,7 @@ def download_audio(url: str, workdir: Path) -> tuple[Path, dict]:
         "format": "bestaudio/best",
         "outtmpl": str(workdir / "audio.%(ext)s"),
         "postprocessors": [{"key": "FFmpegExtractAudio", "preferredcodec": "m4a"}],
+        **EXTRA_OPTS,
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         ydl.download([url])
@@ -74,7 +75,11 @@ def main() -> None:
     parser.add_argument("--outdir", default="output", help="输出目录(默认 output/)")
     parser.add_argument("--paragraph-gap", type=float, default=4.0,
                         help="分段的时间间隔阈值(默认 4 秒)")
+    parser.add_argument("--cookies", help="cookies 文件路径(Netscape 格式),用于需要登录的网站如 B 站")
+    parser.add_argument("--cookies-from-browser",
+                        help="直接读取本机浏览器 cookies,如 chrome、edge、firefox")
     args = parser.parse_args()
+    set_cookies_opts(args.cookies, args.cookies_from_browser)
 
     local = Path(args.source)
     if local.exists():

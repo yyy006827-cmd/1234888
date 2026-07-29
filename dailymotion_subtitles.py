@@ -37,8 +37,19 @@ def sanitize_filename(name: str) -> str:
     return name[:120] or "subtitles"
 
 
+# 额外的 yt-dlp 参数(如 cookies),由命令行选项填充,供本模块和 transcribe_video.py 共用
+EXTRA_OPTS: dict = {}
+
+
+def set_cookies_opts(cookies: str | None, cookies_from_browser: str | None) -> None:
+    if cookies:
+        EXTRA_OPTS["cookiefile"] = cookies
+    if cookies_from_browser:
+        EXTRA_OPTS["cookiesfrombrowser"] = (cookies_from_browser,)
+
+
 def fetch_info(url: str) -> dict:
-    opts = {"quiet": True, "no_warnings": True, "skip_download": True}
+    opts = {"quiet": True, "no_warnings": True, "skip_download": True, **EXTRA_OPTS}
     with yt_dlp.YoutubeDL(opts) as ydl:
         return ydl.extract_info(url, download=False)
 
@@ -70,6 +81,7 @@ def download_subtitle(url: str, lang: str, auto: bool, workdir: Path) -> Path | 
         "subtitleslangs": [lang],
         "subtitlesformat": "vtt/srt/best",
         "outtmpl": str(workdir / "subtitle.%(ext)s"),
+        **EXTRA_OPTS,
     }
     with yt_dlp.YoutubeDL(opts) as ydl:
         ydl.download([url])
@@ -196,7 +208,11 @@ def main() -> None:
     parser.add_argument("--outdir", default="output", help="输出目录(默认 output/)")
     parser.add_argument("--paragraph-gap", type=float, default=4.0,
                         help="相邻字幕间隔超过该秒数且句子已结束时分段(默认 4 秒)")
+    parser.add_argument("--cookies", help="cookies 文件路径(Netscape 格式),用于需要登录的网站如 B 站")
+    parser.add_argument("--cookies-from-browser",
+                        help="直接读取本机浏览器 cookies,如 chrome、edge、firefox")
     args = parser.parse_args()
+    set_cookies_opts(args.cookies, args.cookies_from_browser)
 
     print(f"正在获取视频信息: {args.url}")
     info = fetch_info(args.url)
