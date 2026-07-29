@@ -1,0 +1,14 @@
+---
+description: 小说文风与章节格式；编辑 manuscript/** 时生效
+globs: manuscript/**/*.md
+alwaysApply: false
+---
+
+# 小说正文规则
+
+- 遵守 `manuscript/style.md` 与 `novel.config.yaml` 的 POV / 字数。
+- 章节文件名：`manuscript/chapters/NNN-标题.md`（三位序号）。
+- 必须有 YAML frontmatter：`chapter`、`title`、`status`、`words`、`summary_ref`。
+- 不要在正文里写作者备注或大纲复述；设定冲突写到 `continuity.md`。
+- 对话与动作穿插；避免大段解释世界规则。
+- 章末保留钩子，但不要拆成「未完待续」标语。
