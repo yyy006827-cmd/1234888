@@ -1,0 +1,37 @@
+# 小说自动化工作流配置
+# 修改此文件可调整写作节奏与质量门槛；Cloud Agent / 本地 CLI 都会读取它。
+
+title: "潮汐守望者"
+language: zh-CN
+genre: "科幻 / 奇幻"
+target_audience: "成人向 · 轻悬疑"
+
+# 写作节奏
+writing:
+  words_per_chapter: 2200          # 目标字数（中文按字符近似）
+  words_tolerance: 0.25            # 允许 ±25%
+  chapters_per_run: 1              # 每次自动化只写 1 章
+  pov: "第三人称有限 · 主角视角为主"
+  tense: "过去时叙述语感（中文自然叙事）"
+
+# 质量门槛：不达标则只更新 STATUS，不强制开 PR
+quality:
+  min_chars: 1500
+  require_outline_alignment: true
+  require_continuity_update: true
+  require_chapter_summary: true
+
+# 状态机：agent 按此顺序推进
+pipeline:
+  stages:
+    - init          # 设定 premise / style / world
+    - outline       # 写大纲与角色卡
+    - draft         # 逐章写作（主循环）
+    - revise        # 修订指定章节
+    - complete      # 全书完成
+
+# 导出
+export:
+  formats:
+    - markdown
+  concat_filename: "exports/full-manuscript.md"
