@@ -41,11 +41,15 @@ def sanitize_filename(name: str) -> str:
 EXTRA_OPTS: dict = {}
 
 
-def set_cookies_opts(cookies: str | None, cookies_from_browser: str | None) -> None:
+def set_cookies_opts(cookies: str | None, cookies_from_browser: str | None, impersonate: str | None = None) -> None:
     if cookies:
         EXTRA_OPTS["cookiefile"] = cookies
     if cookies_from_browser:
         EXTRA_OPTS["cookiesfrombrowser"] = (cookies_from_browser,)
+    if impersonate:
+        # yt-dlp ImpersonateTarget: "client[:os]" e.g. firefox-135:macos-14
+        from yt_dlp.networking.impersonate import ImpersonateTarget
+        EXTRA_OPTS["impersonate"] = ImpersonateTarget.from_str(impersonate)
 
 
 def fetch_info(url: str) -> dict:
@@ -211,8 +215,10 @@ def main() -> None:
     parser.add_argument("--cookies", help="cookies 文件路径(Netscape 格式),用于需要登录的网站如 B 站")
     parser.add_argument("--cookies-from-browser",
                         help="直接读取本机浏览器 cookies,如 chrome、edge、firefox")
+    parser.add_argument("--impersonate", default="firefox-135:macos-14",
+                        help="浏览器模拟目标,Dailymotion 等站点需要(默认 firefox-135:macos-14;传空字符串可关闭)")
     args = parser.parse_args()
-    set_cookies_opts(args.cookies, args.cookies_from_browser)
+    set_cookies_opts(args.cookies, args.cookies_from_browser, args.impersonate or None)
 
     print(f"正在获取视频信息: {args.url}")
     info = fetch_info(args.url)

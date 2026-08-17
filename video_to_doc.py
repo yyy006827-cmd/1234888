@@ -43,8 +43,10 @@ def main() -> None:
     parser.add_argument("--cookies", help="cookies 文件路径(Netscape 格式)")
     parser.add_argument("--cookies-from-browser",
                         help="读取本机浏览器 cookies,如 chrome、edge、firefox")
+    parser.add_argument("--impersonate", default="firefox-135:macos-14",
+                        help="浏览器模拟目标(默认 firefox-135:macos-14;传空字符串可关闭)")
     args = parser.parse_args()
-    subs.set_cookies_opts(args.cookies, args.cookies_from_browser)
+    subs.set_cookies_opts(args.cookies, args.cookies_from_browser, args.impersonate or None)
 
     # 第一步:检查字幕轨道
     print(f"正在获取视频信息: {args.url}")

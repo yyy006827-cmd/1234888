@@ -78,8 +78,10 @@ def main() -> None:
     parser.add_argument("--cookies", help="cookies 文件路径(Netscape 格式),用于需要登录的网站如 B 站")
     parser.add_argument("--cookies-from-browser",
                         help="直接读取本机浏览器 cookies,如 chrome、edge、firefox")
+    parser.add_argument("--impersonate", default="firefox-135:macos-14",
+                        help="浏览器模拟目标(默认 firefox-135:macos-14;传空字符串可关闭)")
     args = parser.parse_args()
-    set_cookies_opts(args.cookies, args.cookies_from_browser)
+    set_cookies_opts(args.cookies, args.cookies_from_browser, args.impersonate or None)
 
     local = Path(args.source)
     if local.exists():
