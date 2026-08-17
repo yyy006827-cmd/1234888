@@ -2,6 +2,10 @@
 
 从 Dailymotion、B 站等 yt-dlp 支持的网站视频中提取字幕、对无字幕视频做语音识别,并可将英文字幕翻译成中文,全部自动整理成文档。
 
+## 成品字幕文档
+
+字幕在 [`transcripts/`](./transcripts/) 目录。**请先打开 [`transcripts/README.md`](./transcripts/README.md)**，下载对应 `.zip` 压缩包到电脑打开；不要在 GitHub 网页直接预览超长 Markdown（会卡死）。
+
 ## 完全不懂技术?从这里开始(Windows)
 
 视频链接**不是**写进代码文件里的。正确做法是:运行程序后,它会问你要链接,你把链接**粘贴**进去即可。
