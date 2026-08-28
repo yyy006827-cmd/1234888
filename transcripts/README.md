@@ -9,6 +9,7 @@ GitHub 网页直接打开超长 Markdown 容易卡死。请按下面方式使用
    - [02-Lycan-Queen-莱肯女王.zip](./02-Lycan-Queen-莱肯女王.zip)
    - [03-Lunas-Second-Choice-露娜的第二次选择.zip](./03-Lunas-Second-Choice-露娜的第二次选择.zip)
 - [04-Abandoned-Little-Lucky-Star-被遗弃的小福星.zip](./04-Abandoned-Little-Lucky-Star-被遗弃的小福星.zip)
+- [05-The-Sacrificed-Witch-献祭女巫.zip](./05-The-Sacrificed-Witch-献祭女巫.zip)
 
 2. 或进入对应文件夹，点开 **`01-完整-中英双语.txt`**，再点页面右上角 **Download / Raw**（不要用 Markdown 预览）。
 
@@ -20,6 +21,7 @@ GitHub 网页直接打开超长 Markdown 容易卡死。请按下面方式使用
 | `02-Lycan-Queen-莱肯女王/` | [xawsi9a](https://www.dailymotion.com/video/xawsi9a) | 中英双语完整 txt + 分卷 md |
 | `03-Lunas-Second-Choice-露娜的第二次选择/` | [xajuowq](https://www.dailymotion.com/video/xajuowq) | 中英双语完整 txt + 分卷 md |
 | `04-Abandoned-Little-Lucky-Star-被遗弃的小福星/` | [YouTube x5OMIKoYToM](https://www.youtube.com/watch?v=x5OMIKoYToM) | 中英双语完整 txt + 分卷 md（按对白编号，无时间轴） |
+| `05-The-Sacrificed-Witch-献祭女巫/` | [YouTube yvzOfjA-4eE](https://www.youtube.com/watch?v=yvzOfjA-4eE) | 中英双语完整 txt + 分卷 md（按对白编号，无时间轴） |
 
 每个文件夹内：
 
